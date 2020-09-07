@@ -15,15 +15,18 @@ Including another URLconf
 """
 # Django
 from allauth.account.views import confirm_email
+from django.conf.urls import url
 from rest_framework import routers
 from django.contrib import admin
-from calendar import views
+from calendar_api import views
 from django.urls import path, include
+
+from users.views import FacebookLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),
-    # path('account/', include('allauth.urls')),
-
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
+    path('calendar/', include('calendar_api.urls'))
 ]

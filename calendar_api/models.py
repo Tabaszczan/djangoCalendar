@@ -20,6 +20,14 @@ class Event(models.Model):
 class UserEvent(Event):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name=_('user'))
 
+    class Meta:
+        verbose_name = _('user event')
+        verbose_name_plural = _('users events')
+
 
 class GroupEvent(Event):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name=_('group'))
+
+    class Meta:
+        verbose_name = _('group event')
+        verbose_name_plural = _('groups events')

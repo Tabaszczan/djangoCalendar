@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('auth', '0011_update_proxy_permissions'),
-        ('calendar', '0001_initial'),
+        ('calendar_api', '0001_initial'),
     ]
 
     operations = [
@@ -41,17 +41,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserEvent',
             fields=[
-                ('event_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='calendar.Event')),
+                ('event_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='calendar_api.Event')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='użytkownik')),
             ],
-            bases=('calendar.event',),
+            bases=('calendar_api.event',),
         ),
         migrations.CreateModel(
             name='GroupEvent',
             fields=[
-                ('event_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='calendar.Event')),
+                ('event_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='calendar_api.Event')),
                 ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.Group', verbose_name='grupa')),
             ],
-            bases=('calendar.event',),
+            bases=('calendar_api.event',),
         ),
     ]
