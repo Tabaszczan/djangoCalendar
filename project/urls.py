@@ -1,32 +1,24 @@
-"""project URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-# Django
-from allauth.account.views import confirm_email
-from django.conf.urls import url
-from rest_framework import routers
 from django.contrib import admin
-from calendar_api import views
-from django.urls import path, include
+from django.urls import include
+from django.urls import path
 
-from users.views import FacebookLogin
+# 3rd-party
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from calendar_api.views import GroupEventViewSet
+from calendar_api.views import UserEventViewSet
+from rest_framework import routers
+from users.views import CustomGroupViewSet, CustomUserViewSet
+
+router = routers.DefaultRouter()
+router.register(r'groups', CustomGroupViewSet)
+router.register(r'users', CustomUserViewSet)
+router.register(r'user_events', UserEventViewSet)
+router.register(r'group_events', GroupEventViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
-    path('calendar/', include('calendar_api.urls'))
+    path('', include(router.urls)),
+    path('api-token-auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api-token-auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

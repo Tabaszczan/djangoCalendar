@@ -1,9 +1,10 @@
+# 3rd-party
 from rest_framework import serializers
-
+from users.models import CustomGroup
 from users.models import CustomUser
 
 
-class UserSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
@@ -17,29 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-class RegisterSerializer(serializers.ModelSerializer):
+class CustomGroupSerializer(serializers.ModelSerializer):
     class Meta:
-        form = CustomUser
-        model = CustomUser
-        fields = [
-            'username',
-            'email',
-            'password',
-            'first_name',
-            'last_name',
-            'avatar',
-            'telephone',
-        ]
-
-    def save(self, **kwargs):
-        user = super().save()
-        return user
-
-
-class LoginSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = [
-            'email',
-            'password',
-        ]
+        model = CustomGroup
+        fields = ['id', 'group_name', 'members']

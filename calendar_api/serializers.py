@@ -1,15 +1,19 @@
+# 3rd-party
 from rest_framework import serializers
+from users.models import CustomGroup
 
-from .models import Event, UserEvent
-
-
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        fields = ['event_name', 'start_date', 'end_date', 'description']
+# Local
+from .models import GroupEvent
+from .models import UserEvent
 
 
 class EventUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserEvent
-        fields = ['event_name', 'start_date', 'end_date', 'description', 'user']
+        fields = ['event_name', 'start_date', 'end_date', 'description']
+
+
+class GroupEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GroupEvent
+        fields = ['event_name', 'start_date', 'end_date', 'description', 'group', 'owner']

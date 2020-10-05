@@ -1,9 +1,23 @@
-from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from django.shortcuts import render
 
-# Create your views here.
-from rest_auth.registration.views import SocialLoginView
+# 3rd-party
+from rest_framework import permissions
+from rest_framework import viewsets
+from users.models import CustomGroup, CustomUser
+from users.serializers import CustomGroupSerializer, CustomUserSerializer
 
 
-class FacebookLogin(SocialLoginView):
-    adapter_class = FacebookOAuth2Adapter
+class CustomGroupViewSet(viewsets.ModelViewSet):
+    queryset = CustomGroup.objects.all()
+    serializer_class = CustomGroupSerializer
+
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class CustomUserViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+    permission_classes = [permissions.IsAuthenticated]

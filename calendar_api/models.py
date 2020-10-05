@@ -1,7 +1,11 @@
-from django.contrib.auth.models import User, Group
+# Django
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 
+# 3rd-party
+from users.models import CustomGroup
 from users.models import CustomUser
 
 
@@ -26,7 +30,8 @@ class UserEvent(Event):
 
 
 class GroupEvent(Event):
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name=_('group'))
+    group = models.ForeignKey(CustomGroup, on_delete=models.CASCADE, verbose_name=_('group'))
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name=_('owner'), null=True)
 
     class Meta:
         verbose_name = _('group event')
