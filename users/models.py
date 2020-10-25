@@ -7,10 +7,19 @@ from django.utils.translation import gettext as _
 # 3rd-party
 from phonenumber_field.modelfields import PhoneNumberField
 
+from users.managers import CustomUserManager
 
-class CustomUser(User):
-    avatar = models.ImageField(_('avatar'), blank=True)
-    telephone = PhoneNumberField(_('phone number'), blank=True)
+
+class CustomUser(AbstractUser):
+    username = None
+    email = models.EmailField(_('email address'), unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    telephone = PhoneNumberField(_('phone number'), blank=True, null=True)
 
     def __str__(self):
         return self.email

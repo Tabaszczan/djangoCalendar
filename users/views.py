@@ -1,9 +1,9 @@
-
 # 3rd-party
 from rest_framework import permissions
 from rest_framework import viewsets
 from users.models import CustomGroup, CustomUser
 from users.serializers import CustomGroupSerializer, CustomUserSerializer
+from .permissions import PostOnlyPermissions
 
 
 class CustomGroupViewSet(viewsets.ModelViewSet):
@@ -16,8 +16,8 @@ class CustomGroupViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
-
-    permission_classes = [permissions.IsAuthenticated]
+# class CustomUserViewSet(viewsets.ModelViewSet):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = CustomUserSerializer
+#
+#     permission_classes = (permissions.AllowAny,)

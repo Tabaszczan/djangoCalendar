@@ -1,52 +1,29 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import {Theme} from "@material-ui/core";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Login from "../login/Login";
-
-
-const useStyles = makeStyles((theme: Theme) => ({
-        root: {
-            height: '100vh',
-            alignItems: 'center',
-        },
-        paper: {
-            padding: theme.spacing(0, 8),
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-        },
-
-    })
-)
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import NavigationBar from "../navbar/NavBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {UserEvents} from "../user_events/UserEvents";
 
 
 function Home() {
-    const classes = useStyles()
+    const user = useSelector((state: any) => state.authentication.user)
     return (
-        <Grid container component="main" className={classes.root}>
+        <div>
             <CssBaseline/>
-            <Grid item xs={false} sm={false} md={7} className={classes.paper}>
-                <img alt="logo"/>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aliquam pellentesque accumsan dui. Etiam mi nunc, commodo vel erat nec,
-                    dictum sollicitudin nibh. Nullam suscipit nisl quis tortor vulputate,
-                    sit amet dictum nunc efficitur. Aenean quis enim quis ligula consequat tristique nec ac urna.
-                    Phasellus sapien metus, tempus facilisis tellus in, pellentesque congue eros.
-                    Quisque eget blandit libero, sed malesuada urna.
-                    Sed non magna in odio tincidunt vulputate vel quis urna.
-                    Phasellus vel posuere tortor. Etiam venenatis euismod leo,
-                    et eleifend nisi iaculis ut.
-                </p>
-            </Grid>
-            <Grid item xs={12} sm={12} md={5}>
-                <Login/>
-            </Grid>
-        </Grid>
+            <NavigationBar/>
+            <div>
+                <h2>Dane:</h2>
+                <ul>
+                    <li>Email: {user.email}</li>
+                    <li>Imię: {user.first_name}</li>
+                    <li>Nazwisko: {user.last_name}</li>
+                    <li>Numer tel.: {user.telephone}</li>
+                </ul>
+            </div>
+            <UserEvents/>
+        </div>
+
     )
 }
 
-export default Home
+export {Home}
