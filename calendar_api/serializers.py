@@ -10,10 +10,10 @@ from .models import UserEvent
 class EventUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserEvent
-        fields = ['event_name', 'start_date', 'end_date', 'description']
+        fields = ['id', 'event_name', 'start_date', 'end_date', 'description']
 
 
 class GroupEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupEvent
-        fields = ['event_name', 'start_date', 'end_date', 'description', 'group', 'owner']
+        fields = ['id', 'event_name', 'start_date', 'end_date', 'description', 'group', 'owner']

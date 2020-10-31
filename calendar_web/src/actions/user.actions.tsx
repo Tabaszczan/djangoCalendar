@@ -7,6 +7,7 @@ export const userActions = {
     logout,
     login,
     register,
+    getEvents,
 }
 
 function login(email: string, password: string, from: any) {
@@ -16,7 +17,6 @@ function login(email: string, password: string, from: any) {
             email => {
                 dispatch(success(email))
                 history.push(from)
-                window.location.reload()
             },
             error => {
                 dispatch(failure(error.toString()))
@@ -68,4 +68,24 @@ function register(user: any) {
     function failure(error: any) {
         return {type: userConstants.REGISTER_FAILURE, error}
     }
+}
+function getEvents() {
+    return (dispatch: any) => {
+        userService.getEvents().then(
+            events => dispatch(success(events)),
+            error => dispatch(failure(error.toString())),
+        )
+    }
+    function success(events: any) { return { type: userConstants.GET_EVENTS_SUCCESS, events } }
+    function failure(error: any) { return { type: userConstants.GET_EVENTS_FAILURE, error } }
+}
+
+function _delete(id: number) {
+    return (dispatch: any) => {
+        dispatch(request(id));
+
+    }
+    function request(id: number) {return {type: userConstants.DELETE_EVENTS_REQUEST, id}}
+    function success(id: number) {return {type: userConstants.DELETE_EVENTS_SUCCESS, id}}
+    function error(id: number, error: string) {return {type: userConstants.DELETE_EVENTS_SUCCESS, id, error}}
 }

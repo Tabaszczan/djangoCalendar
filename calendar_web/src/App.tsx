@@ -5,6 +5,8 @@ import {Home} from "./components/home/Home";
 import {
     Router,
     Route,
+    Redirect,
+    Switch,
 } from "react-router-dom";
 import {history} from './helpers/history'
 import {alertActions} from "./actions/alert.actions";
@@ -58,11 +60,12 @@ function App() {
                         </Alert>
                         }
                         <Router history={history}>
-                            <div>
+                            <Switch>
                                 <PrivateRoute exact path="/" component={Home}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" component={Register}/>
-                            </div>
+                                <Redirect from="*" to="/" />
+                            </Switch>
                         </Router>
                     </div>
                 </div>

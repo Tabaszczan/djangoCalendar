@@ -9,9 +9,10 @@ import Drawer from "@material-ui/core/Drawer";
 import MenuIcon from '@material-ui/icons/Menu';
 import {userActions} from "../../actions/user.actions";
 import {history} from "../../helpers/history";
-import {connect, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 
 type Anchor = 'right'
+
 function DrawerRight() {
     const [state, setState] = useState({
         right: false,
@@ -72,9 +73,5 @@ function DrawerRight() {
         </div>
     )
 }
-function mapStateToProps(state: any) {
-    return {
-        state
-    }
-}
-export { DrawerRight}
+
+export {DrawerRight}
