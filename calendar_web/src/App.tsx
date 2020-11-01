@@ -18,6 +18,7 @@ import Alert from '@material-ui/lab/Alert';
 import {AlertTitle} from "@material-ui/lab";
 import {Provider} from "react-redux";
 import {store} from "./helpers/store";
+import {EventEdit} from "./components/events/EventEdit";
 
 const theme = createMuiTheme({
     palette: {
@@ -64,6 +65,7 @@ function App() {
                                 <PrivateRoute exact path="/" component={Home}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" component={Register}/>
+                                <Route path="/event/add" component={EventEdit}/>
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </Router>

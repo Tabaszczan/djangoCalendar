@@ -34,13 +34,16 @@ function DrawerRight() {
         dispatch(userActions.logout())
         history.push('/')
     }
+    const handleEventRoute = () => {
+        history.push('/event/add')
+    }
     const list = (anchor: Anchor) => (
         <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}>
             <List>
                 {['Calendar', 'Add meeting', 'Groups', 'Settings'].map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem button key={text} onClick={index === 1 ? handleEventRoute : () => {}}>
                         <ListItemIcon><MailOutline/></ListItemIcon>
                         <ListItemText primary={text}/>
                     </ListItem>

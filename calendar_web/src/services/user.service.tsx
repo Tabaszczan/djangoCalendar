@@ -6,6 +6,9 @@ export const userService = {
     logout,
     register,
     getEvents,
+    addEvent,
+    update,
+    delete: _delete,
 }
 
 function login(email: string, password: string) {
@@ -22,7 +25,7 @@ function login(email: string, password: string) {
                 .then(handleResponse)
                 .then(object => {
                     localStorage.setItem('JWT', JSON.stringify(object))
-                     return fetch(`${config.apiUrl}rest-auth/login/`, requestOptions).then(handleResponse)
+                    return fetch(`${config.apiUrl}rest-auth/login/`, requestOptions).then(handleResponse)
                 })
         })
 }
@@ -43,19 +46,38 @@ function register(user: any) {
 
 function getEvents() {
     const requestOptions = {
-            method: 'GET',
-            headers: authHeader()
-        }
-         return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleEventResponse)
-        }
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleEventResponse)
+}
 
 function _delete(id: number) {
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader(),
     };
-    return fetch(`${config.apiUrl}user_events/`)
+    return fetch(`${config.apiUrl}user_events/${id}`, requestOptions).then(handleEventResponse)
 }
+
+function update(event: any) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
+        body: JSON.stringify(event)
+    }
+    return fetch(`${config.apiUrl}user_events/${event.id}/`, requestOptions).then(handleResponse)
+}
+
+function addEvent(event: any) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
+        body: JSON.stringify(event)
+    }
+    return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleEventResponse)
+}
+
 export function handleResponse(response: any) {
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text)
@@ -72,8 +94,10 @@ export function handleResponse(response: any) {
 }
 
 function handleEventResponse(response: any) {
+    console.log(response)
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text)
+        console.log(data)
         if (!response.ok) {
             const error = data || response.statusText;
             return Promise.reject(error);

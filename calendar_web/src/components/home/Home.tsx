@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import NavigationBar from "../navbar/NavBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import {createStyles, Link, Theme} from "@material-ui/core";
+import {createStyles, Theme} from "@material-ui/core";
 import {userActions} from "../../actions/user.actions";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -12,6 +12,10 @@ import Paper from "@material-ui/core/Paper";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
+import {Alert} from "@material-ui/lab";
+import CloseIcon from '@material-ui/icons/Close';
+import Snackbar from "@material-ui/core/Snackbar";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,22 +38,37 @@ function Home() {
     const events = useSelector((state: any) => state.events)
     const user = useSelector((state: any) => state.authentication.user)
     const dispatch = useDispatch()
+    const [open, setOpen] = useState(false)
+
     useEffect(() => {
         dispatch(userActions.getEvents())
+        // eslint-disable-next-line
     }, [])
+
+    function handleDeleteEvent(id: number) {
+        dispatch(userActions.delete(id))
+        setOpen(true)
+    }
+
+    const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return
+        }
+        setOpen(false)
+    }
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <CssBaseline/>
             <NavigationBar/>
+                            {/*<h2>Dane:</h2>*/}
+                {/*<ul>*/}
+                {/*    <li>Email: {user.user.email}</li>*/}
+                {/*    <li>Imię: {user.user.first_name}</li>*/}
+                {/*    <li>Nazwisko: {user.user.last_name}</li>*/}
+                {/*    <li>Numer tel.: {user.user.telephone}</li>*/}
+                {/*</ul>*/}
             <Container maxWidth={false}>
-                <h2>Dane:</h2>
-                <ul>
-                    <li>Email: {user.user.email}</li>
-                    <li>Imię: {user.user.first_name}</li>
-                    <li>Nazwisko: {user.user.last_name}</li>
-                    <li>Numer tel.: {user.user.telephone}</li>
-                </ul>
                 <h2>Wydarzenia:</h2>
                 <Grid container
                       direction="row"
@@ -68,23 +87,23 @@ function Home() {
                                         <Typography variant="subtitle1">
                                             {item.event_name}
                                         </Typography>
-                                        {new Date(item.start_date).toLocaleDateString() === new Date(item.end_date).toLocaleDateString() &&
-                                        <Container maxWidth={false}>
-                                            <Typography variant="body2" color="textSecondary">
-                                                {new Date(item.start_date).toLocaleDateString()}
-                                            </Typography>
-                                            <Typography variant="caption" color="textSecondary">
-                                                {new Date(item.start_date).toLocaleTimeString([], {
-                                                    hour: '2-digit',
-                                                    minute: '2-digit'
-                                                })}
-                                                -
-                                                {new Date(item.end_date).toLocaleTimeString([], {
-                                                    hour: '2-digit',
-                                                    minute: '2-digit'
-                                                })}
-                                            </Typography>
-                                        </Container> ||
+                                        {(new Date(item.start_date).toLocaleDateString() === new Date(item.end_date).toLocaleDateString() &&
+                                            <Container maxWidth={false}>
+                                                <Typography variant="body2" color="textSecondary">
+                                                    {new Date(item.start_date).toLocaleDateString()}
+                                                </Typography>
+                                                <Typography variant="caption" color="textSecondary">
+                                                    {new Date(item.start_date).toLocaleTimeString([], {
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    })}
+                                                    -
+                                                    {new Date(item.end_date).toLocaleTimeString([], {
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    })}
+                                                </Typography>
+                                            </Container>) ||
                                         <Typography variant="body2" color="textSecondary" gutterBottom>
                                             {new Date(item.start_date).toLocaleDateString()} - {new Date(item.end_date).toLocaleDateString()}
                                         </Typography>
@@ -96,13 +115,27 @@ function Home() {
                                             {item.description}
                                         </Typography>
                                     </Grid>
-                                    <Grid item >
+                                    <Grid item>
                                         <IconButton edge="end" color="inherit" aria-label="edit" size="small">
                                             <EditIcon fontSize="small"/>
                                         </IconButton>
-                                        <IconButton edge="end" color="inherit" aria-label="remove" size="small">
-                                            <DeleteIcon fontSize="small"/>
-                                        </IconButton>
+                                        {
+                                            item.deleting ? <CircularProgress/>
+                                                : item.deleteError ?
+                                                <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                                                          open={open}
+                                                          autoHideDuration={6000}
+                                                          onClose={handleClose}>
+                                                    <Alert severity="error"
+                                                           action={<CloseIcon onClick={handleClose}/>}>Wystąpił
+                                                        błąd</Alert>
+                                                </Snackbar>
+                                                : <span><IconButton edge="end" color="inherit" aria-label="remove"
+                                                                    size="small"
+                                                                    onClick={() => handleDeleteEvent(item.id)}>
+                                                        <DeleteIcon fontSize="small"/>
+                                                    </IconButton></span>
+                                        }
                                     </Grid>
                                 </Grid>
                             </Paper>
@@ -112,7 +145,6 @@ function Home() {
                 </Grid>
             </Container>
         </div>
-
     )
 }
 
