@@ -2,6 +2,7 @@ import {userService} from "../services/user.service";
 import {userConstants} from "../constants/user.constants";
 import {history} from '../helpers/history';
 import {alertActions} from "./alert.actions";
+import {eventUserConstants} from "../constants/eventUser.constants";
 
 export const userActions = {
     logout,
@@ -9,6 +10,8 @@ export const userActions = {
     register,
     getEvents,
     addEvent,
+    updateEvent,
+    getEvent,
     delete: _delete,
 }
 
@@ -82,11 +85,11 @@ function getEvents() {
     }
 
     function success(events: any) {
-        return {type: userConstants.GET_EVENTS_SUCCESS, events}
+        return {type: eventUserConstants.GET_EVENTS_SUCCESS, events}
     }
 
     function failure(error: any) {
-        return {type: userConstants.GET_EVENTS_FAILURE, error}
+        return {type: eventUserConstants.GET_EVENTS_FAILURE, error}
     }
 }
 
@@ -102,15 +105,15 @@ function _delete(id: number) {
     }
 
     function request(id: number) {
-        return {type: userConstants.DELETE_EVENTS_REQUEST, id}
+        return {type: eventUserConstants.DELETE_EVENTS_REQUEST, id}
     }
 
     function success(id: number) {
-        return {type: userConstants.DELETE_EVENTS_SUCCESS, id}
+        return {type: eventUserConstants.DELETE_EVENTS_SUCCESS, id}
     }
 
     function failure(id: number, error: string) {
-        return {type: userConstants.DELETE_EVENTS_FAILURE, id, error}
+        return {type: eventUserConstants.DELETE_EVENTS_FAILURE, id, error}
     }
 }
 
@@ -130,12 +133,68 @@ function addEvent(event: any) {
     }
 
     function request(event: any) {
-        return {type: userConstants.CREATE_EVENTS_REQUEST, event}
+        return {type: eventUserConstants.CREATE_EVENTS_REQUEST, event}
     }
-    function success(event: any){
-        return {type: userConstants.CREATE_EVENTS_SUCCESS, event}
+
+    function success(event: any) {
+        return {type: eventUserConstants.CREATE_EVENTS_SUCCESS, event}
     }
-    function failure(event: any, error: any){
-        return {type: userConstants.CREATE_EVENTS_FAILURE, event, error}
+
+    function failure(event: any, error: any) {
+        return {type: eventUserConstants.CREATE_EVENTS_FAILURE, event, error}
+    }
+}
+
+function updateEvent(event: any) {
+    return (dispatch: any) => {
+        dispatch(request(event))
+        userService.updateEvent(event).then(
+            event => {
+                dispatch(success(event))
+                history.push('')
+            },
+            error => {
+                dispatch(failure(event, error.toString()))
+            }
+        )
+    }
+
+    function request(event: any) {
+        return {type: eventUserConstants.UPDATE_EVENT_REQUEST, event}
+    }
+
+    function success(event: any) {
+        return {type: eventUserConstants.UPDATE_EVENT_SUCCESS, event}
+    }
+
+    function failure(event: any, error: any) {
+        return {type: eventUserConstants.UPDATE_EVENT_FAILURE, event, error}
+    }
+}
+
+function getEvent(id: number) {
+    return (dispatch: any) => {
+        dispatch(request(id))
+        userService.getEvent(id).then(
+            event => {
+                dispatch(success(event))
+                history.push('event/update/'+id)
+            },
+            error => {
+                dispatch(failure(id, error.toString()))
+            }
+        )
+    }
+
+    function request(id: any) {
+        return {type: eventUserConstants.GET_EVENT_REQUEST, id}
+    }
+
+    function success(event: any) {
+        return {type: eventUserConstants.GET_EVENT_SUCCESS, event}
+    }
+
+    function failure(event: any, error: any) {
+        return {type: eventUserConstants.GET_EVENT_FAILURE, event, error}
     }
 }

@@ -16,6 +16,7 @@ import {Alert} from "@material-ui/lab";
 import CloseIcon from '@material-ui/icons/Close';
 import Snackbar from "@material-ui/core/Snackbar";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {history} from "../../helpers/history";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -50,6 +51,10 @@ function Home() {
         setOpen(true)
     }
 
+    function handleEditEvent(id: any) {
+        dispatch(userActions.getEvent(id))
+    }
+
     const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return
@@ -61,13 +66,13 @@ function Home() {
         <div className={classes.root}>
             <CssBaseline/>
             <NavigationBar/>
-                            {/*<h2>Dane:</h2>*/}
-                {/*<ul>*/}
-                {/*    <li>Email: {user.user.email}</li>*/}
-                {/*    <li>Imię: {user.user.first_name}</li>*/}
-                {/*    <li>Nazwisko: {user.user.last_name}</li>*/}
-                {/*    <li>Numer tel.: {user.user.telephone}</li>*/}
-                {/*</ul>*/}
+            {/*<h2>Dane:</h2>*/}
+            {/*<ul>*/}
+            {/*    <li>Email: {user.user.email}</li>*/}
+            {/*    <li>Imię: {user.user.first_name}</li>*/}
+            {/*    <li>Nazwisko: {user.user.last_name}</li>*/}
+            {/*    <li>Numer tel.: {user.user.telephone}</li>*/}
+            {/*</ul>*/}
             <Container maxWidth={false}>
                 <h2>Wydarzenia:</h2>
                 <Grid container
@@ -83,7 +88,7 @@ function Home() {
                                    square
                                    className={classes.paper}>
                                 <Grid container spacing={2} justify="space-between">
-                                    <Grid item zeroMinWidth>
+                                    <Grid item zeroMinWidth xs={10}>
                                         <Typography variant="subtitle1">
                                             {item.event_name}
                                         </Typography>
@@ -115,8 +120,12 @@ function Home() {
                                             {item.description}
                                         </Typography>
                                     </Grid>
-                                    <Grid item>
-                                        <IconButton edge="end" color="inherit" aria-label="edit" size="small">
+                                    <Grid item xs={2}>
+                                        <IconButton edge="end"
+                                                    color="inherit"
+                                                    aria-label="edit"
+                                                    size="small"
+                                                    onClick={() => handleEditEvent(item.id)}>
                                             <EditIcon fontSize="small"/>
                                         </IconButton>
                                         {

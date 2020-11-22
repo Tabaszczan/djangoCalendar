@@ -7,7 +7,8 @@ export const userService = {
     register,
     getEvents,
     addEvent,
-    update,
+    updateEvent,
+    getEvent,
     delete: _delete,
 }
 
@@ -60,13 +61,21 @@ function _delete(id: number) {
     return fetch(`${config.apiUrl}user_events/${id}`, requestOptions).then(handleEventResponse)
 }
 
-function update(event: any) {
+function updateEvent(event: any) {
     const requestOptions = {
         method: 'PUT',
         headers: {...authHeader(), 'Content-Type': 'application/json'},
         body: JSON.stringify(event)
     }
     return fetch(`${config.apiUrl}user_events/${event.id}/`, requestOptions).then(handleResponse)
+}
+
+function getEvent(id: any) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    }
+    return fetch(`${config.apiUrl}user_events/${id}/`, requestOptions).then(handleResponse)
 }
 
 function addEvent(event: any) {
@@ -94,10 +103,8 @@ export function handleResponse(response: any) {
 }
 
 function handleEventResponse(response: any) {
-    console.log(response)
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text)
-        console.log(data)
         if (!response.ok) {
             const error = data || response.statusText;
             return Promise.reject(error);

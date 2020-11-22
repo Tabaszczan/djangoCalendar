@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import {createStyles, Grid, Theme} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../actions/user.actions";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function EventForm() {
+function EventCreateForm() {
     const [event, setEvent] = useState({
+        id: null,
         event_name: "",
         start_date: "",
         end_date: "",
@@ -30,20 +31,22 @@ function EventForm() {
     })
     const dispatch = useDispatch()
 
-    function handleChange(e: any){
+    function handleChange(e: any) {
         const {name, value} = e.target
         setEvent(event => ({...event, [name]: value}))
     }
-    function handleSubmit(e: any){
+
+    function handleSubmit(e: any) {
         e.preventDefault()
         dispatch(userActions.addEvent(event))
     }
+
     const classes = useStyles();
     return (<form className={classes.root} onSubmit={handleSubmit}>
         <Grid container className={classes.padding}>
             <Grid item xs={12} sm={6} className={classes.padding}>
                 <h2 className={classes.marginAutoItem}>Utwórz wydarzenie</h2>
-                <Grid item >
+                <Grid item>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -113,4 +116,4 @@ function EventForm() {
     </form>)
 }
 
-export {EventForm}
+export {EventCreateForm}

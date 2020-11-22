@@ -1,46 +1,59 @@
-import {userConstants} from "../constants/user.constants";
+import {eventUserConstants} from "../constants/eventUser.constants";
 
 
 export function events(state = {
     items: []
 }, action: any) {
     switch (action.type) {
-        case userConstants.GET_EVENTS_REQUEST:
+        case eventUserConstants.GET_EVENTS_REQUEST:
             return {
                 loading: true
             }
-        case userConstants.GET_EVENTS_SUCCESS:
+        case eventUserConstants.GET_EVENTS_SUCCESS:
             return {
                 items: action.events
             }
-        case userConstants.GET_EVENTS_FAILURE:
+        case eventUserConstants.GET_EVENTS_FAILURE:
             return {error: action.error}
-        case userConstants.DELETE_EVENTS_REQUEST:
+        case eventUserConstants.DELETE_EVENTS_REQUEST:
             return {
                 ...state,
-                items: state.items.map((item: any) => 
-                item.id === action.id ? {...item, deleting:true}: item)
+                items: state.items.map((item: any) =>
+                    item.id === action.id ? {...item, deleting: true} : item)
             }
-        case userConstants.DELETE_EVENTS_SUCCESS:
+        case eventUserConstants.DELETE_EVENTS_SUCCESS:
             return {
                 items: state.items.filter((item: any) => item.id !== action.id)
             }
-        case userConstants.DELETE_EVENTS_FAILURE:
+        case eventUserConstants.DELETE_EVENTS_FAILURE:
             return {
                 ...state,
                 items: state.items.map((item: any) => {
-                    if (item.id === action.id){
+                    if (item.id === action.id) {
                         const {deleting, ...itemCopy} = item
-                        return{...itemCopy, deleteError: action.error}
+                        return {...itemCopy, deleteError: action.error}
                     }
                     return item
                 })
             }
-        case userConstants.CREATE_EVENTS_REQUEST:
+        case eventUserConstants.CREATE_EVENTS_REQUEST:
             return {
                 ...state
             }
-
+        case eventUserConstants.CREATE_EVENTS_SUCCESS:
+            return {}
+        case eventUserConstants.CREATE_EVENTS_FAILURE:
+            return {}
+        case eventUserConstants.GET_EVENT_REQUEST:
+            return {
+                loading: true
+            }
+        case eventUserConstants.GET_EVENT_SUCCESS:
+            return {
+                event: action.event
+            }
+        case eventUserConstants.GET_EVENT_FAILURE:
+            return {error: action.error}
         default:
             return state
     }

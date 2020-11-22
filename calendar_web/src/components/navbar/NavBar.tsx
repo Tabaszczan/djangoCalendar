@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const NavigationBar = () => {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.appbar}>
@@ -35,7 +34,7 @@ const NavigationBar = () => {
                     <Typography variant="h6" className={classes.title}>
                         <img src={logo} alt={"logo"} className={classes.img}/>
                     </Typography>
-                    <IconButton edge="end" color="inherit" aria-label="menu">
+                    <IconButton edge="end" color="inherit" aria-label="menu" size="small">
                         <DrawerRight/>
                     </IconButton>
                 </Toolbar>
