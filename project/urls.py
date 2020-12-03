@@ -9,11 +9,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from calendar_api.views import GroupEventViewSet
 from calendar_api.views import UserEventViewSet
 from rest_framework import routers
-from users.views import CustomGroupViewSet
+from users.views import CustomGroupViewSet, CustomUserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'groups', CustomGroupViewSet)
-# router.register(r'users', CustomUserViewSet)
+router.register(r'users', CustomUserViewSet)
 router.register(r'user_events', UserEventViewSet)
 router.register(r'group_events', GroupEventViewSet)
 

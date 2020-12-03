@@ -50,7 +50,7 @@ function getEvents() {
         method: 'GET',
         headers: authHeader()
     }
-    return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleEventResponse)
+    return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleResponse)
 }
 
 function _delete(id: number) {
@@ -58,7 +58,7 @@ function _delete(id: number) {
         method: 'DELETE',
         headers: authHeader(),
     };
-    return fetch(`${config.apiUrl}user_events/${id}`, requestOptions).then(handleEventResponse)
+    return fetch(`${config.apiUrl}user_events/${id}`, requestOptions).then(handleResponse)
 }
 
 function updateEvent(event: any) {
@@ -84,10 +84,10 @@ function addEvent(event: any) {
         headers: {...authHeader(), 'Content-Type': 'application/json'},
         body: JSON.stringify(event)
     }
-    return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleEventResponse)
+    return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleResponse)
 }
 
-export function handleResponse(response: any) {
+function handleResponse(response: any) {
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text)
         if (!response.ok) {
