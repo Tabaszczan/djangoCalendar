@@ -7,6 +7,7 @@ import {createStyles, Theme} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {DrawerRight} from "./Drawer";
 import logo from "../../img/logo.png";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,7 +33,9 @@ const NavigationBar = () => {
             <AppBar position="static" className={classes.appbar}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
+                        <Link href="/">
                         <img src={logo} alt={"logo"} className={classes.img}/>
+                        </Link>
                     </Typography>
                     <IconButton edge="end" color="inherit" aria-label="menu" size="small">
                         <DrawerRight/>

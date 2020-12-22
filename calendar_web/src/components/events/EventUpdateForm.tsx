@@ -5,6 +5,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../actions/user.actions";
+import moment from "moment/moment";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,7 +33,7 @@ function EventUpdateForm() {
     const getEvent = useSelector((state: any) => state.events.event) //TODO: ZROBIC COS Z DATETIME ZEBY BYLO
     useEffect(() => {
         setEvent(getEvent)
-    }, [])
+    }, [getEvent])
     const dispatch = useDispatch()
 
     function handleChange(e: any) {
@@ -77,7 +78,7 @@ function EventUpdateForm() {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        value={event.start_date}
+                        value={moment(event.start_date).format('YYYY-MM-DDTHH:MM')}
                         onChange={handleChange}
                     />
                 </Grid>
@@ -94,7 +95,7 @@ function EventUpdateForm() {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        value={event.end_date}
+                        value={moment(event.end_date).format('YYYY-MM-DDTHH:MM')}
                         onChange={handleChange}
                     />
                 </Grid>

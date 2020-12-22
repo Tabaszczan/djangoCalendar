@@ -20,6 +20,7 @@ import {Provider} from "react-redux";
 import {store} from "./helpers/store";
 import {EventCreate} from "./components/events/EventCreate";
 import {EventUpdate} from "./components/events/EventUpdate";
+import {GroupsList} from "./components/groups/GroupsList";
 
 const theme = createMuiTheme({
     palette: {
@@ -68,6 +69,7 @@ function App() {
                                 <Route path="/register" component={Register}/>
                                 <Route path="/event/add" component={EventCreate}/>
                                 <Route path="/event/update/:id" component={EventUpdate}/>
+                                <Route path="/groups/" component={GroupsList}/>
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </Router>

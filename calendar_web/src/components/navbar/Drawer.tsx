@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {List} from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {ExitToApp, MailOutline} from "@material-ui/icons";
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,6 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {userActions} from "../../actions/user.actions";
 import {history} from "../../helpers/history";
 import {useDispatch} from "react-redux";
+import EventOutlinedIcon from '@material-ui/icons/EventOutlined';
+import PostAddOutlinedIcon from '@material-ui/icons/PostAddOutlined';
+import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
+import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 
 type Anchor = 'right'
 
@@ -40,25 +45,35 @@ function DrawerRight() {
     const handleHomePage = () => {
         history.push('')
     }
+    const handleGroupRoute = () => {
+        history.push('/groups/')
+    }
     const list = (anchor: Anchor) => (
         <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}>
+            <Divider/>
             <List>
-                {['Calendar', 'Add meeting', 'Groups', 'Settings'].map((text, index) => (
+                {['Wydarzenia', 'Dodaj wydarzenie', 'Grupy', 'Dodaj Grupę', 'Ustawienia'].map((text, index) => (
                     <ListItem button key={text} onClick={index === 0 ?
                         handleHomePage : index === 1 ?
-                            handleEventRoute : () => {
-                            }}>
-                        <ListItemIcon><MailOutline/></ListItemIcon>
+                            handleEventRoute : index === 2 ? handleGroupRoute : () =>{} }>
+                        <ListItemIcon>
+                            {index === 0 ? <EventOutlinedIcon/> :
+                            index === 1 ? <PostAddOutlinedIcon/> :
+                            index === 2 ? <GroupOutlinedIcon/> :
+                            index === 3 ? <GroupAddOutlinedIcon/> :
+                            index === 4 ? <SettingsOutlinedIcon/> :
+                            <SettingsOutlinedIcon/>}
+                        </ListItemIcon>
                         <ListItemText primary={text}/>
                     </ListItem>
                 ))}
                 <Divider/>
                 <List>
-                    <ListItem button key={"Logout"} onClick={handleLogout}>
-                        <ListItemIcon><ExitToApp/></ListItemIcon>
-                        <ListItemText primary={"Logout"}/>
+                    <ListItem button key={"Wyloguj się"} onClick={handleLogout}>
+                        <ListItemIcon><ExitToAppOutlinedIcon/></ListItemIcon>
+                        <ListItemText primary={"Wyloguj się"}/>
                     </ListItem>
                 </List>
             </List>

@@ -87,7 +87,7 @@ function addEvent(event: any) {
     return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleResponse)
 }
 
-function handleResponse(response: any) {
+export function handleResponse(response: any) {
     return response.text().then((text: any) => {
         const data = text && JSON.parse(text)
         if (!response.ok) {
@@ -95,17 +95,6 @@ function handleResponse(response: any) {
                 logout();
                 window.location.reload(true);
             }
-            const error = data || response.statusText;
-            return Promise.reject(error);
-        }
-        return data
-    })
-}
-
-function handleEventResponse(response: any) {
-    return response.text().then((text: any) => {
-        const data = text && JSON.parse(text)
-        if (!response.ok) {
             const error = data || response.statusText;
             return Promise.reject(error);
         }

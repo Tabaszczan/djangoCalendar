@@ -30,15 +30,15 @@ class CustomUserSerializer(RegisterSerializer):
 
 
 class CustomUsersGet(serializers.ModelSerializer):
-
     class Meta:
         model = CustomUser
         fields = ['id', 'first_name', 'last_name', 'email', 'telephone']
 
 
 class CustomGroupSerializer(serializers.ModelSerializer):
+    members = CustomUsersGet(many=True)
+    owner = CustomUserSerializer(many=False)
 
     class Meta:
         model = CustomGroup
         fields = ['id', 'group_name', 'owner', 'members']
-        depth = 1
