@@ -35,10 +35,33 @@ class CustomUsersGet(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'email', 'telephone']
 
 
-class CustomGroupSerializer(serializers.ModelSerializer):
+class GroupListSerializer(serializers.ListSerializer):
     members = CustomUsersGet(many=True)
     owner = CustomUserSerializer(many=False)
 
     class Meta:
         model = CustomGroup
         fields = ['id', 'group_name', 'owner', 'members']
+
+
+class CustomGroupSerializer(serializers.ModelSerializer):
+    owner = serializers.HiddenField(default=CurrentUserDefault())
+
+    class Meta:
+        model = CustomGroup
+        fields = ['id', 'group_name', 'owner', 'members']
+        list_serializer_class = GroupListSerializer
+
+    def list(self, validated_data):
+        print(validated_data)
+        print(self)
+
+    def create(self, validated_data):
+        group = CustomGroup(
+            group_name=validated_data['group_name'],
+            owner=validated_data['owner'],
+        )
+        group.save()
+        group.members.add(*validated_data['members'])
+        group.save()
+        return group

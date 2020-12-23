@@ -67,9 +67,9 @@ function App() {
                                 <PrivateRoute exact path="/" component={Home}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" component={Register}/>
-                                <Route path="/event/add" component={EventCreate}/>
-                                <Route path="/event/update/:id" component={EventUpdate}/>
-                                <Route path="/groups/" component={GroupsList}/>
+                                <PrivateRoute path="/event/add" component={EventCreate}/>
+                                <PrivateRoute path="/event/update/:id" component={EventUpdate}/>
+                                <PrivateRoute path="/groups/" component={GroupsList}/>
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </Router>
