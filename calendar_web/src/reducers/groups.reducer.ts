@@ -38,6 +38,14 @@ export function groups(state = {
                     return item
                 })
             }
+        case groupsConstants.CREATE_GROUP_REQUEST:
+            return {
+                ...state
+            }
+        case groupsConstants.CREATE_GROUP_SUCCESS:
+            return {}
+        case groupsConstants.CREATE_GROUP_FAILURE:
+            return {}
         default:
             return state
     }

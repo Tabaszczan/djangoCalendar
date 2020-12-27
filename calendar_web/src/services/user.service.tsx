@@ -10,6 +10,7 @@ export const userService = {
     updateEvent,
     getEvent,
     delete: _delete,
+    getUsers,
 }
 
 function login(email: string, password: string) {
@@ -85,6 +86,15 @@ function addEvent(event: any) {
         body: JSON.stringify(event)
     }
     return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleResponse)
+}
+
+
+function getUsers() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    }
+    return fetch(`${config.apiUrl}users/`, requestOptions).then(handleResponse)
 }
 
 export function handleResponse(response: any) {

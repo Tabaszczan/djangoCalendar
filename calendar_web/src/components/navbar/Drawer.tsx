@@ -48,6 +48,9 @@ function DrawerRight() {
     const handleGroupRoute = () => {
         history.push('/groups/')
     }
+    const handleGroupAddRoute = () => {
+        history.push('/add/groups')
+    }
     const list = (anchor: Anchor) => (
         <div
             onClick={toggleDrawer(anchor, false)}
@@ -57,7 +60,9 @@ function DrawerRight() {
                 {['Wydarzenia', 'Dodaj wydarzenie', 'Grupy', 'Dodaj Grupę', 'Ustawienia'].map((text, index) => (
                     <ListItem button key={text} onClick={index === 0 ?
                         handleHomePage : index === 1 ?
-                            handleEventRoute : index === 2 ? handleGroupRoute : () =>{} }>
+                            handleEventRoute :
+                            index === 2 ? handleGroupRoute :
+                                index === 3 ? handleGroupAddRoute : () => {} }>
                         <ListItemIcon>
                             {index === 0 ? <EventOutlinedIcon/> :
                             index === 1 ? <PostAddOutlinedIcon/> :

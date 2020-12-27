@@ -4,6 +4,7 @@ import {registration} from './registration.reducer';
 import {alert} from './alert.reducer';
 import {events} from './eventUser.reducer'
 import {groups} from "./groups.reducer";
+import {users} from "./getUsers.reducer";
 
 const rootReducer = combineReducers({
     authentication,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     alert,
     events,
     groups,
+    users,
 });
 
 export default rootReducer;

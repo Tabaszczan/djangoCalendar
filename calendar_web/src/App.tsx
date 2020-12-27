@@ -21,6 +21,7 @@ import {store} from "./helpers/store";
 import {EventCreate} from "./components/events/EventCreate";
 import {EventUpdate} from "./components/events/EventUpdate";
 import {GroupsList} from "./components/groups/GroupsList";
+import {GroupCreate} from "./components/groups/GroupCreate";
 
 const theme = createMuiTheme({
     palette: {
@@ -49,8 +50,7 @@ function App() {
         history.listen((location, action) => {
             dispatch(alertActions.clear())
         })
-        // eslint-disable-next-line
-    }, [])
+    }, [dispatch])
     return (
         <Provider store={store}>
             <MuiThemeProvider theme={theme}>
@@ -70,6 +70,7 @@ function App() {
                                 <PrivateRoute path="/event/add" component={EventCreate}/>
                                 <PrivateRoute path="/event/update/:id" component={EventUpdate}/>
                                 <PrivateRoute path="/groups/" component={GroupsList}/>
+                                <PrivateRoute path="/add/groups" component={GroupCreate}/>
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </Router>

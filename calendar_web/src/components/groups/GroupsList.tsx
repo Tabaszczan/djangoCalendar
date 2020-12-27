@@ -16,6 +16,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Container from "@material-ui/core/Container";
 import {groupsActions} from "../../actions/groups.action";
 import {useDispatch, useSelector} from "react-redux";
+import {userActions} from "../../actions/user.actions";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function GroupsList() {
     const groups = useSelector((state: any) => state.groups)
     const user = useSelector((state: any) => state.authentication.user)
+
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     useEffect(() => {
@@ -80,7 +82,7 @@ function GroupsList() {
                                             {item.group_name}
                                         </Typography>
                                         <Typography variant="subtitle1" gutterBottom>
-                                            Właściciel: {item.owner.first_name} {item.owner.last_name}, {item.owner.email}
+                                            Właściciel:{item.owner.first_name} {item.owner.last_name}, {item.owner.email}
                                         </Typography>
                                         <Typography variant="subtitle1" gutterBottom>
                                             Członkowie:

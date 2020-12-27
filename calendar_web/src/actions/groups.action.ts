@@ -1,10 +1,11 @@
 import {groupsService} from "../services/groups.service";
 import {groupsConstants} from "../constants/groups.constants";
-
+import {history} from '../helpers/history';
 
 export const groupsActions = {
     getGroups,
     deleteGroup: _deleteGroup,
+    addGroup,
 }
 
 function getGroups() {
@@ -43,5 +44,30 @@ function _deleteGroup(id: number) {
 
     function failure(id: number, error: string) {
         return {type: groupsConstants.DELETE_GROUP_FAILURE, id, error}
+    }
+}
+
+function addGroup(group: any) {
+    return (dispatch: any) => {
+        dispatch(request(group))
+        groupsService.addGroup(group).then(
+            group => {
+                dispatch(success(group))
+                history.goBack()
+            },
+            error => {
+                dispatch(failure(group, error.toString()))
+            }
+        )
+    }
+    function request(group: any) {
+        return {type: groupsConstants.CREATE_GROUP_REQUEST, group}
+    }
+     function success(group: any) {
+        return {type: groupsConstants.CREATE_GROUP_SUCCESS, group}
+    }
+
+    function failure(group: any, error: any) {
+        return {type: groupsConstants.CREATE_GROUP_FAILURE, group, error}
     }
 }

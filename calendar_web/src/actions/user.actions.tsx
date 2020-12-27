@@ -13,6 +13,7 @@ export const userActions = {
     updateEvent,
     getEvent,
     delete: _delete,
+    getUsers,
 }
 
 function login(email: string, password: string, from: any) {
@@ -178,7 +179,7 @@ function getEvent(id: number) {
         userService.getEvent(id).then(
             event => {
                 dispatch(success(event))
-                history.push('event/update/'+id)
+                history.push('event/update/' + id)
             },
             error => {
                 dispatch(failure(id, error.toString()))
@@ -196,5 +197,22 @@ function getEvent(id: number) {
 
     function failure(event: any, error: any) {
         return {type: eventUserConstants.GET_EVENT_FAILURE, event, error}
+    }
+}
+
+function getUsers() {
+    return (dispatch: any) => {
+        userService.getUsers().then(
+            users => dispatch(success(users)),
+            error => dispatch(failure(error.toString())),
+        )
+    }
+
+    function success(users: any) {
+        return {type: userConstants.GET_USERS_SUCCESS, users}
+    }
+
+    function failure(error: any) {
+        return {type: userConstants.GET_USERS_FAILURE, error}
     }
 }
