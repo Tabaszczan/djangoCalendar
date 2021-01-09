@@ -30,7 +30,7 @@ function EventUpdateForm() {
         end_date: "",
         description: "",
     })
-    const getEvent = useSelector((state: any) => state.events.event) //TODO: ZROBIC COS Z DATETIME ZEBY BYLO
+    const getEvent = useSelector((state: any) => state.events.event)
     useEffect(() => {
         setEvent(getEvent)
     }, [getEvent])

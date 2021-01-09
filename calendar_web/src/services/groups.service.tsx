@@ -6,6 +6,8 @@ export const groupsService = {
     getGroups,
     addGroup,
     deleteGroup: _deleteGroup,
+    getGroup,
+    updateGroup,
 }
 
 function getGroups() {
@@ -31,4 +33,21 @@ function _deleteGroup(id: number) {
         headers: authHeader(),
     }
     return fetch(`${config.apiUrl}groups/${id}`, requestOptions).then(handleResponse)
+}
+
+function getGroup(id: any){
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    }
+    return fetch(`${config.apiUrl}groups/${id}/`, requestOptions).then(handleResponse)
+}
+
+function updateGroup(group: any){
+    const requestOptions = {
+        method: 'PUT',
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
+        body: JSON.stringify(group)
+    }
+    return fetch(`${config.apiUrl}groups/${group.id}/`, requestOptions).then(handleResponse)
 }

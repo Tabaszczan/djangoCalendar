@@ -38,8 +38,11 @@ class GroupEventViewSet(viewsets.ModelViewSet):
     serializer_class = GroupEventSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
     def get_queryset(self):
         user = self.request.user
         groups_members = CustomGroup.objects.filter(Q(members=user) | Q(owner=user))
-        qs = self.queryset.filter(group__in=groups_members)
+        qs = self.queryset.filter(Q(group__in=groups_members) | Q(owner=user))
         return qs

@@ -1,4 +1,5 @@
 import {groupsConstants} from "../constants/groups.constants";
+import {act} from "react-dom/test-utils";
 
 
 export function groups(state = {
@@ -46,6 +47,18 @@ export function groups(state = {
             return {}
         case groupsConstants.CREATE_GROUP_FAILURE:
             return {}
+        case groupsConstants.GET_GROUP_REQUEST:
+            return {
+                loading: true
+            }
+        case groupsConstants.GET_GROUP_SUCCESS:
+            return {
+                group: action.group
+            }
+        case groupsConstants.GET_GROUP_FAILURE:
+            return {
+                error: action.error
+            }
         default:
             return state
     }

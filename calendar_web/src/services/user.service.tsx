@@ -11,6 +11,11 @@ export const userService = {
     getEvent,
     delete: _delete,
     getUsers,
+    getGroupEvents,
+    deleteGroupEvent,
+    updateGroupEvent,
+    getGroupEvent,
+    addGroupEvent,
 }
 
 function login(email: string, password: string) {
@@ -53,13 +58,27 @@ function getEvents() {
     }
     return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleResponse)
 }
-
+function getGroupEvents() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+    return fetch(`${config.apiUrl}groups_events/`, requestOptions).then(handleResponse)
+}
 function _delete(id: number) {
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader(),
     };
     return fetch(`${config.apiUrl}user_events/${id}`, requestOptions).then(handleResponse)
+}
+
+function deleteGroupEvent(id: number) {
+        const requestOptions = {
+        method: 'DELETE',
+        headers: authHeader(),
+    };
+    return fetch(`${config.apiUrl}group_events/${id}`, requestOptions).then(handleResponse)
 }
 
 function updateEvent(event: any) {
@@ -71,6 +90,15 @@ function updateEvent(event: any) {
     return fetch(`${config.apiUrl}user_events/${event.id}/`, requestOptions).then(handleResponse)
 }
 
+function updateGroupEvent(event: any) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
+        body: JSON.stringify(event)
+    }
+    return fetch(`${config.apiUrl}group_events/${event.id}/`, requestOptions).then(handleResponse)
+}
+
 function getEvent(id: any) {
     const requestOptions = {
         method: 'GET',
@@ -78,7 +106,13 @@ function getEvent(id: any) {
     }
     return fetch(`${config.apiUrl}user_events/${id}/`, requestOptions).then(handleResponse)
 }
-
+function getGroupEvent(id: any) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    }
+    return fetch(`${config.apiUrl}group_events/${id}/`, requestOptions).then(handleResponse)
+}
 function addEvent(event: any) {
     const requestOptions = {
         method: 'POST',
@@ -86,6 +120,14 @@ function addEvent(event: any) {
         body: JSON.stringify(event)
     }
     return fetch(`${config.apiUrl}user_events/`, requestOptions).then(handleResponse)
+}
+function addGroupEvent(event: any) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {...authHeader(), 'Content-Type': 'application/json'},
+        body: JSON.stringify(event)
+    }
+    return fetch(`${config.apiUrl}group_events/`, requestOptions).then(handleResponse)
 }
 
 

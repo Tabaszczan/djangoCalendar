@@ -1,10 +1,10 @@
 import React from "react";
-import NavigationBar from "../navbar/NavBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import {createStyles, Theme} from "@material-ui/core";
+import NavigationBar from "../navbar/NavBar";
+import {GroupCreateForm} from "./GroupCreateForm";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {EventsList} from "../events/EventsList";
-import {GroupEventsList} from "../events/GroupEventList";
+import {createStyles, Theme} from "@material-ui/core";
+import {GroupUpdateForm} from "./GroupUpdateForm";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -14,17 +14,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
-function Home() {
+function GroupUpdate() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <CssBaseline/>
             <NavigationBar/>
-            <EventsList/>
-            <GroupEventsList/>
+            <GroupUpdateForm/>
         </div>
     )
 }
 
-export {Home}
+export {GroupUpdate}

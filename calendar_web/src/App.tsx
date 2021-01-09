@@ -22,6 +22,7 @@ import {EventCreate} from "./components/events/EventCreate";
 import {EventUpdate} from "./components/events/EventUpdate";
 import {GroupsList} from "./components/groups/GroupsList";
 import {GroupCreate} from "./components/groups/GroupCreate";
+import {GroupUpdate} from "./components/groups/GroupUpdate";
 
 const theme = createMuiTheme({
     palette: {
@@ -54,28 +55,25 @@ function App() {
     return (
         <Provider store={store}>
             <MuiThemeProvider theme={theme}>
-                <div>
-                    <div>
-                        {alert.message &&
-                        <Alert severity={"error"}>
-                            <AlertTitle>Error</AlertTitle>
-                            {alert.message}
-                        </Alert>
-                        }
-                        <Router history={history}>
-                            <Switch>
-                                <PrivateRoute exact path="/" component={Home}/>
-                                <Route path="/login" component={Login}/>
-                                <Route path="/register" component={Register}/>
-                                <PrivateRoute path="/event/add" component={EventCreate}/>
-                                <PrivateRoute path="/event/update/:id" component={EventUpdate}/>
-                                <PrivateRoute path="/groups/" component={GroupsList}/>
-                                <PrivateRoute path="/add/groups" component={GroupCreate}/>
-                                <Redirect from="*" to="/" />
-                            </Switch>
-                        </Router>
-                    </div>
-                </div>
+                {alert.message &&
+                <Alert severity={"error"}>
+                    <AlertTitle>Error</AlertTitle>
+                    {alert.message}
+                </Alert>
+                }
+                <Router history={history}>
+                    <Switch>
+                        <PrivateRoute exact path="/" component={Home}/>
+                        <Route path="/login" component={Login}/>
+                        <Route path="/register" component={Register}/>
+                        <PrivateRoute path="/event/add" component={EventCreate}/>
+                        <PrivateRoute path="/event/update/:id" component={EventUpdate}/>
+                        <PrivateRoute path="/groups/" component={GroupsList}/>
+                        <Route path="/group/update/:id" component={GroupUpdate}/>
+                        <PrivateRoute path="/add/groups" component={GroupCreate}/>
+                        <Redirect from="*" to="/"/>
+                    </Switch>
+                </Router>
             </MuiThemeProvider>
         </Provider>
     );

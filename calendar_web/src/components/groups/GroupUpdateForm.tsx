@@ -44,9 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function GroupCreateForm() {
+function GroupUpdateForm() {
     const users = useSelector((state: any) => state.users)
     const user = useSelector((state: any) => state.authentication.user)
+    const getGroup = useSelector((state: any) => state.groups.group)
+    console.log(getGroup)
     const [group, setGroup] = useState({
         group_name: "",
         members: [],
@@ -54,7 +56,8 @@ function GroupCreateForm() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(userActions.getUsers())
-    }, [dispatch])
+        setGroup(getGroup)
+    }, [dispatch, getGroup])
 
     function handleChange(e: any) {
         const {name, value} = e.target
@@ -67,16 +70,23 @@ function GroupCreateForm() {
     }
 
     function handleSubmit(e: any) {
-        console.log(group)
         e.preventDefault()
-        dispatch(groupsActions.addGroup(group))
+        dispatch(groupsActions.updateGroup(group))
     }
+    function getMembersId(group: any){
+         const membersId: any[] = []
+        group.members.map((item: any, index: any) => {
+           membersId.push(item.id)
+        })
+        return membersId
+    }
+
 
     const classes = useStyles();
     return (<form className={classes.root} onSubmit={handleSubmit}>
         <Grid container className={classes.padding}>
             <Grid item xs={12} sm={6} className={classes.padding}>
-                <h2 className={classes.marginAutoItem}>Utwórz grupę</h2>
+                <h2 className={classes.marginAutoItem}>Utwórz grupę </h2>
                 <Grid item>
                     <TextField
                         variant="outlined"
@@ -92,6 +102,7 @@ function GroupCreateForm() {
                     />
                 </Grid>
                 <Grid item className={classes.padding}>
+                    {console.log(group)}
                     <TableContainer component={Paper}>
                         <Table size="small">
                             <TableHead>
@@ -115,6 +126,7 @@ function GroupCreateForm() {
                                                     name="members"
                                                     value={row.id}
                                                     onChange={handleCheckboxChange}
+                                                    checked={getMembersId(group).includes(row.id)}
                                                 />
                                             </TableCell>
                                             <TableCell
@@ -139,4 +151,4 @@ function GroupCreateForm() {
 }
 
 
-export {GroupCreateForm}
+export {GroupUpdateForm}

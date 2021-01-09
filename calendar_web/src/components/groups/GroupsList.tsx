@@ -43,7 +43,7 @@ function GroupsList() {
     }, [dispatch])
 
     function handleEditGroup(id: any) {
-
+        dispatch(groupsActions.getGroup(id))
     }
 
     function handleDeleteGroupEvent(id: number) {
@@ -82,7 +82,7 @@ function GroupsList() {
                                             {item.group_name}
                                         </Typography>
                                         <Typography variant="subtitle1" gutterBottom>
-                                            Właściciel:{item.owner.first_name} {item.owner.last_name}, {item.owner.email}
+                                            Właściciel: {item.owner.first_name} {item.owner.last_name}, {item.owner.email}
                                         </Typography>
                                         <Typography variant="subtitle1" gutterBottom>
                                             Członkowie:
