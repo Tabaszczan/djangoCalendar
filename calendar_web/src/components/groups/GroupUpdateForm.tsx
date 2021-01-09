@@ -48,7 +48,6 @@ function GroupUpdateForm() {
     const users = useSelector((state: any) => state.users)
     const user = useSelector((state: any) => state.authentication.user)
     const getGroup = useSelector((state: any) => state.groups.group)
-    console.log(getGroup)
     const [group, setGroup] = useState({
         group_name: "",
         members: [],

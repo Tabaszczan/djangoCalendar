@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../actions/user.actions";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {createStyles, Theme} from "@material-ui/core";
+import {groupsActions} from "../../actions/groups.action";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,21 +33,23 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function GroupEventsList() {
-    const events = useSelector((state: any) => state.events)
+    const events = useSelector((state: any) => state.eventsGroup)
+    const groups = useSelector((state: any) => state.groups)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        dispatch(userActions.getEvents())
+        dispatch(userActions.getGroupEvents())
+        dispatch(groupsActions.getGroups())
     }, [dispatch])
 
     function handleDeleteEvent(id: number) {
-        dispatch(userActions.delete(id))
+        dispatch(userActions.deleteEventGroup(id))
         setOpen(true)
     }
 
     function handleEditEvent(id: any) {
-        dispatch(userActions.getEvent(id))
+        // dispatch(userActions.getEvent(id))
     }
 
 
@@ -65,7 +68,7 @@ function GroupEventsList() {
                   justify="flex-start"
                   alignItems="baseline"
                   spacing={2}>
-                {events.items &&
+                {!!events.items &&
                 events.items.map((item: any, k: any) =>
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={item.id}>
                         <Paper elevation={3}
@@ -98,6 +101,12 @@ function GroupEventsList() {
                                         {new Date(item.start_date).toLocaleDateString()} - {new Date(item.end_date).toLocaleDateString()}
                                     </Typography>
                                     }
+                                    <Typography variant="subtitle1" gutterBottom>
+                                        Nazwa grupy: {
+                                        !!groups.items &&
+                                        !!groups.items.find((x: { id: any; }) => x.id === item.group) &&
+                                        groups.items.find((x: { id: any; }) => x.id === item.group).group_name}
+                                    </Typography>
                                     <Typography variant="subtitle1" gutterBottom>
                                         Opis:
                                     </Typography>

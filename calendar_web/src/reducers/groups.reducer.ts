@@ -1,5 +1,4 @@
 import {groupsConstants} from "../constants/groups.constants";
-import {act} from "react-dom/test-utils";
 
 
 export function groups(state = {

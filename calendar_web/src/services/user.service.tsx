@@ -63,7 +63,7 @@ function getGroupEvents() {
         method: 'GET',
         headers: authHeader()
     }
-    return fetch(`${config.apiUrl}groups_events/`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}group_events/`, requestOptions).then(handleResponse)
 }
 function _delete(id: number) {
     const requestOptions = {

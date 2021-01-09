@@ -3,6 +3,7 @@ import {userConstants} from "../constants/user.constants";
 import {history} from '../helpers/history';
 import {alertActions} from "./alert.actions";
 import {eventUserConstants} from "../constants/eventUser.constants";
+import {eventGroupConstants} from "../constants/eventGroup.constants";
 
 export const userActions = {
     logout,
@@ -14,6 +15,8 @@ export const userActions = {
     getEvent,
     delete: _delete,
     getUsers,
+    getGroupEvents,
+    deleteEventGroup,
 }
 
 function login(email: string, password: string, from: any) {
@@ -94,6 +97,23 @@ function getEvents() {
     }
 }
 
+function getGroupEvents() {
+    return (dispatch: any) => {
+        userService.getGroupEvents().then(
+            group_events => dispatch(success(group_events)),
+            error => dispatch(failure(error.toString())),
+        )
+    }
+
+    function success(group_events: any) {
+        return {type: eventGroupConstants.GET_GROUP_EVENTS_SUCCESS, group_events}
+    }
+
+    function failure(error: any) {
+        return {type: eventGroupConstants.GET_GROUP_EVENTS_FAILURE, error}
+    }
+}
+
 function _delete(id: number) {
     return (dispatch: any) => {
         dispatch(request(id));
@@ -117,7 +137,29 @@ function _delete(id: number) {
         return {type: eventUserConstants.DELETE_EVENTS_FAILURE, id, error}
     }
 }
+function deleteEventGroup(id: number) {
+    return (dispatch: any) => {
+        dispatch(request(id));
 
+        userService.deleteGroupEvent(id)
+            .then(
+                event_group => dispatch(success(id)),
+                error => dispatch(failure(id, error.toString()))
+            )
+    }
+
+    function request(id: number) {
+        return {type: eventGroupConstants.DELETE_GROUP_EVENTS_REQUEST, id}
+    }
+
+    function success(id: number) {
+        return {type: eventGroupConstants.DELETE_GROUP_EVENTS_SUCCESS, id}
+    }
+
+    function failure(id: number, error: string) {
+        return {type: eventGroupConstants.DELETE_GROUP_EVENTS_FAILURE, id, error}
+    }
+}
 
 function addEvent(event: any) {
     return (dispatch: any) => {
