@@ -38,7 +38,7 @@ export function eventsGroup(state = {items: []}, action: any) {
             }
         case eventGroupConstants.GET_GROUP_EVENT_SUCCESS:
             return {
-                event: action.group_events
+                event_group: action.event_group
             }
         case eventGroupConstants.GET_GROUP_EVENT_FAILURE:
             return {error: action.error}
@@ -53,6 +53,6 @@ export function eventsGroup(state = {items: []}, action: any) {
         case eventGroupConstants.GET_GROUP_EVENTS_FAILURE:
             return {error: action.error}
         default:
-            return state
+            return {...state}
     }
 }

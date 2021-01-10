@@ -49,7 +49,7 @@ function GroupEventsList() {
     }
 
     function handleEditEvent(id: any) {
-        // dispatch(userActions.getEvent(id))
+        dispatch(userActions.getGroupEvent(id))
     }
 
 

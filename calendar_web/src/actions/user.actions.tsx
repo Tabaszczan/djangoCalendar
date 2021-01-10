@@ -18,6 +18,8 @@ export const userActions = {
     getGroupEvents,
     deleteEventGroup,
     addGroupEvent,
+    updateGroupEvent,
+    getGroupEvent,
 }
 
 function login(email: string, password: string, from: any) {
@@ -138,6 +140,7 @@ function _delete(id: number) {
         return {type: eventUserConstants.DELETE_EVENTS_FAILURE, id, error}
     }
 }
+
 function deleteEventGroup(id: number) {
     return (dispatch: any) => {
         dispatch(request(id));
@@ -243,6 +246,33 @@ function updateEvent(event: any) {
     }
 }
 
+function updateGroupEvent(event_group: any) {
+    return (dispatch: any) => {
+        dispatch(request(event_group))
+        userService.updateGroupEvent(event_group).then(
+            event_group => {
+                dispatch(success(event_group))
+                history.push('')
+            },
+            error => {
+                dispatch(failure(event_group, error.toString()))
+            }
+        )
+    }
+
+    function request(event_group: any) {
+        return {type: eventGroupConstants.UPDATE_GROUP_EVENT_REQUEST, event_group}
+    }
+
+    function success(event_group: any) {
+        return {type: eventGroupConstants.UPDATE_GROUP_EVENT_SUCCESS, event_group}
+    }
+
+    function failure(event_group: any, error: any) {
+        return {type: eventGroupConstants.UPDATE_GROUP_EVENT_FAILURE, event_group, error}
+    }
+}
+
 function getEvent(id: number) {
     return (dispatch: any) => {
         dispatch(request(id))
@@ -267,6 +297,33 @@ function getEvent(id: number) {
 
     function failure(event: any, error: any) {
         return {type: eventUserConstants.GET_EVENT_FAILURE, event, error}
+    }
+}
+
+function getGroupEvent(id: number) {
+    return (dispatch: any) => {
+        dispatch(request(id))
+        userService.getGroupEvent(id).then(
+            event_group => {
+                dispatch(success(event_group))
+                history.push('event-group/update/' + id)
+            },
+            error => {
+                dispatch(failure(id, error.toString()))
+            }
+        )
+    }
+
+    function request(id: any) {
+        return {type: eventGroupConstants.GET_GROUP_EVENT_REQUEST, id}
+    }
+
+    function success(event_group: any) {
+        return {type: eventGroupConstants.GET_GROUP_EVENT_SUCCESS, event_group}
+    }
+
+    function failure(event_group: any, error: any) {
+        return {type: eventGroupConstants.GET_GROUP_EVENT_FAILURE, event_group, error}
     }
 }
 

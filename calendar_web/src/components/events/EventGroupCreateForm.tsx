@@ -34,12 +34,6 @@ function EventGroupCreateForm() {
     })
     const dispatch = useDispatch()
     const groups = useSelector((state: any) => state.groups)
-    const [groupValue, setGroupValue] = useState({
-        id: 0,
-        group_name: "",
-        owner: {},
-        members: [],
-    })
     let groups_list: any[] = []
     groups_list = groups.items
 
@@ -53,7 +47,6 @@ function EventGroupCreateForm() {
     }
 
     function handleEventGroupSubmit(e: any) {
-
         e.preventDefault()
         dispatch(userActions.addGroupEvent(event))
     }

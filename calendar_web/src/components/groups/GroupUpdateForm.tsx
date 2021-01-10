@@ -101,7 +101,6 @@ function GroupUpdateForm() {
                     />
                 </Grid>
                 <Grid item className={classes.padding}>
-                    {console.log(group)}
                     <TableContainer component={Paper}>
                         <Table size="small">
                             <TableHead>
