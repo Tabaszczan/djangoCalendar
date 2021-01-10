@@ -3,8 +3,9 @@ import TextField from "@material-ui/core/TextField";
 import {createStyles, Grid, Theme} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../actions/user.actions";
+import {Autocomplete} from "@material-ui/lab";
 import {groupsActions} from "../../actions/groups.action";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function EventCreateForm() {
+function EventGroupCreateForm() {
     const [event, setEvent] = useState({
         id: null,
         event_name: "",
@@ -32,6 +33,15 @@ function EventCreateForm() {
         group: 0,
     })
     const dispatch = useDispatch()
+    const groups = useSelector((state: any) => state.groups)
+    const [groupValue, setGroupValue] = useState({
+        id: 0,
+        group_name: "",
+        owner: {},
+        members: [],
+    })
+    let groups_list: any[] = []
+    groups_list = groups.items
 
     useEffect(() => {
         dispatch(groupsActions.getGroups())
@@ -42,17 +52,25 @@ function EventCreateForm() {
         setEvent(event => ({...event, [name]: value}))
     }
 
-    function handleSubmit(e: any) {
+    function handleEventGroupSubmit(e: any) {
+
         e.preventDefault()
-        dispatch(userActions.addEvent(event))
+        dispatch(userActions.addGroupEvent(event))
+    }
+
+    function handleInputChange(event1: any, value: any) {
+        const object = groups_list.filter(obj => {
+            return obj.group_name === value
+        })
+        setEvent(event => ({...event, ['group']: object[0].id}))
     }
 
     const classes = useStyles();
     return (
         <Grid container className={classes.padding}>
             <Grid item xs={12} sm={6} className={classes.padding}>
-                <form id="solo" className={classes.root} onSubmit={handleSubmit}>
-                    <h2 className={classes.marginAutoItem}>Utwórz wydarzenie</h2>
+                <form id="group" className={classes.root} onSubmit={handleEventGroupSubmit}>
+                    <h2 className={classes.marginAutoItem}>Utwórz wydarzenie Grupowe</h2>
                     <Grid item>
                         <TextField
                             variant="outlined"
@@ -65,6 +83,16 @@ function EventCreateForm() {
                             autoFocus
                             value={event.event_name}
                             onChange={handleChange}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <Autocomplete
+                            options={groups_list}
+                            getOptionLabel={(option) => option.group_name}
+                            renderInput={(params) =>
+                                <TextField {...params} variant="outlined" label="Grupy" name="group"/>}
+                            onInputChange={handleInputChange}
+
                         />
                     </Grid>
                     <Grid item>
@@ -122,4 +150,4 @@ function EventCreateForm() {
         </Grid>)
 }
 
-export {EventCreateForm}
+export {EventGroupCreateForm}

@@ -23,6 +23,7 @@ import {EventUpdate} from "./components/events/EventUpdate";
 import {GroupsList} from "./components/groups/GroupsList";
 import {GroupCreate} from "./components/groups/GroupCreate";
 import {GroupUpdate} from "./components/groups/GroupUpdate";
+import {EventGroupCreate} from "./components/events/EventGroupCreate";
 
 const theme = createMuiTheme({
     palette: {
@@ -67,6 +68,7 @@ function App() {
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
                         <PrivateRoute path="/event/add" component={EventCreate}/>
+                        <PrivateRoute path="/event-group/add" component={EventGroupCreate}/>
                         <PrivateRoute path="/event/update/:id" component={EventUpdate}/>
                         <PrivateRoute path="/groups/" component={GroupsList}/>
                         <Route path="/group/update/:id" component={GroupUpdate}/>

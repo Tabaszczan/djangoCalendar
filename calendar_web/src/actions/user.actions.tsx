@@ -17,6 +17,7 @@ export const userActions = {
     getUsers,
     getGroupEvents,
     deleteEventGroup,
+    addGroupEvent,
 }
 
 function login(email: string, password: string, from: any) {
@@ -185,6 +186,33 @@ function addEvent(event: any) {
 
     function failure(event: any, error: any) {
         return {type: eventUserConstants.CREATE_EVENTS_FAILURE, event, error}
+    }
+}
+
+function addGroupEvent(event_group: any) {
+    return (dispatch: any) => {
+        dispatch(request(event_group))
+        userService.addGroupEvent(event_group).then(
+            event_group => {
+                dispatch(success(event_group))
+                history.push('')
+            },
+            error => {
+                dispatch(failure(event_group, error.toString()))
+            }
+        )
+    }
+
+    function request(event_group: any) {
+        return {type: eventGroupConstants.CREATE_GROUP_EVENTS_REQUEST, event_group}
+    }
+
+    function success(event_group: any) {
+        return {type: eventGroupConstants.CREATE_GROUP_EVENTS_SUCCESS, event_group}
+    }
+
+    function failure(event_group: any, error: any) {
+        return {type: eventGroupConstants.CREATE_GROUP_EVENTS_FAILURE, event_group, error}
     }
 }
 

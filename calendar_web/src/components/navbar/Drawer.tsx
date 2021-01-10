@@ -15,7 +15,7 @@ import PostAddOutlinedIcon from '@material-ui/icons/PostAddOutlined';
 import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
 import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
-
+import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
 type Anchor = 'right'
 
 function DrawerRight() {
@@ -42,6 +42,9 @@ function DrawerRight() {
     const handleEventRoute = () => {
         history.push('/event/add')
     }
+     const handleEventGroupRoute = () => {
+        history.push('/event-group/add')
+    }
     const handleHomePage = () => {
         history.push('')
     }
@@ -57,18 +60,20 @@ function DrawerRight() {
             onKeyDown={toggleDrawer(anchor, false)}>
             <Divider/>
             <List>
-                {['Wydarzenia', 'Dodaj wydarzenie', 'Grupy', 'Dodaj Grupę', 'Ustawienia'].map((text, index) => (
+                {['Wydarzenia', 'Dodaj wydarzenie', 'Dodaj wydarzenie grupowe', 'Grupy', 'Dodaj Grupę', 'Ustawienia'].map((text, index) => (
                     <ListItem button key={text} onClick={index === 0 ?
                         handleHomePage : index === 1 ?
                             handleEventRoute :
-                            index === 2 ? handleGroupRoute :
-                                index === 3 ? handleGroupAddRoute : () => {} }>
+                            index === 2 ? handleEventGroupRoute :
+                            index === 3 ? handleGroupRoute :
+                                index === 4 ? handleGroupAddRoute : () => {} }>
                         <ListItemIcon>
                             {index === 0 ? <EventOutlinedIcon/> :
                             index === 1 ? <PostAddOutlinedIcon/> :
-                            index === 2 ? <GroupOutlinedIcon/> :
-                            index === 3 ? <GroupAddOutlinedIcon/> :
-                            index === 4 ? <SettingsOutlinedIcon/> :
+                            index === 2 ? <EventAvailableOutlinedIcon/> :
+                            index === 3 ? <GroupOutlinedIcon/> :
+                            index === 4 ? <GroupAddOutlinedIcon/> :
+                            index === 5 ? <SettingsOutlinedIcon/> :
                             <SettingsOutlinedIcon/>}
                         </ListItemIcon>
                         <ListItemText primary={text}/>

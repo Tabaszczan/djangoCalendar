@@ -67,7 +67,6 @@ function GroupCreateForm() {
     }
 
     function handleSubmit(e: any) {
-        console.log(group)
         e.preventDefault()
         dispatch(groupsActions.addGroup(group))
     }
