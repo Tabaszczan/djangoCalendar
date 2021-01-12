@@ -6,7 +6,7 @@ from calendar_api.models import UserEvent, GroupEvent
 
 
 @admin.register(UserEvent)
-class CustomUserAdmin(admin.ModelAdmin):
+class UserEventAdmin(admin.ModelAdmin):
     list_display = [
         'user',
         'event_name',
@@ -20,7 +20,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 
 @admin.register(GroupEvent)
-class CustomUserAdmin(admin.ModelAdmin):
+class GroupEventAdmin(admin.ModelAdmin):
     list_display = [
         'group',
         'owner',
