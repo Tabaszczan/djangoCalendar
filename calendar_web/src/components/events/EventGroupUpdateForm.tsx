@@ -70,16 +70,9 @@ function EventGroupUpdateForm() {
             <Grid item xs={12} sm={6} className={classes.padding}>
                 <h2 className={classes.marginAutoItem}>Zaktualizuj wydarzenie</h2>
                 <Grid item>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="event_name"
-                        label="Event Name"
-                        name="event_name"
-                        autoFocus
-                        value={event.event_name}
+                    <TextField variant="outlined" margin="normal" required
+                        fullWidth id="event_name" label="Event Name"
+                        name="event_name" autoFocus value={event.event_name}
                         onChange={handleChange}
                     />
                 </Grid>

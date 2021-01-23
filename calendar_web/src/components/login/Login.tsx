@@ -104,30 +104,15 @@ function Login() {
                         Zaloguj się
                     </Typography>
                     <form onSubmit={handleSubmit} >
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            name="email"
-                            autoComplete="email"
-                            value={email}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required
+                            fullWidth id="email" label="Email" name="email"
+                            autoComplete="email" value={email} onChange={handleChange}
                             autoFocus
                         />
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Hasło"
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" required
+                            fullWidth name="password" label="Hasło" type="password"
+                            id="password" value={password} onChange={handleChange}
                             autoComplete="current-password"
                         />
                         <FormControlLabel
@@ -135,10 +120,7 @@ function Login() {
                             label="Zapamiętaj mnie"
                         />
                         <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
+                            type="submit" fullWidth variant="contained" color="primary"
                         >
                             Zaloguj się
                         </Button>{loggingIn &&  <CircularProgress/>}
