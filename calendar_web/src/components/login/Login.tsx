@@ -101,7 +101,7 @@ function Login() {
                         <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Zaloguj się
                     </Typography>
                     <form onSubmit={handleSubmit} >
                         <TextField
@@ -110,7 +110,7 @@ function Login() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                             value={email}
@@ -123,7 +123,7 @@ function Login() {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Hasło"
                             type="password"
                             id="password"
                             value={password}
@@ -132,7 +132,7 @@ function Login() {
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
+                            label="Zapamiętaj mnie"
                         />
                         <Button
                             type="submit"
@@ -140,17 +140,14 @@ function Login() {
                             variant="contained"
                             color="primary"
                         >
-                            Sign In
+                            Zaloguj się
                         </Button>{loggingIn &&  <CircularProgress/>}
                         <Grid container>
                             <Grid item xs>
-                                <UrlLink href="#" variant="body2">
-                                    Forgot password?
-                                </UrlLink>
                             </Grid>
                             <Grid item>
                                 <UrlLink href={"/register"} variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {"Nie posiadasz konta? Zarejestruj się"}
                                 </UrlLink>
                             </Grid>
                         </Grid>

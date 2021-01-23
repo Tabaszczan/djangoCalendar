@@ -73,7 +73,7 @@ function Register() {
                         <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Zarejestruj się
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <TextField
@@ -82,7 +82,7 @@ function Register() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -95,7 +95,7 @@ function Register() {
                             required
                             fullWidth
                             name="password1"
-                            label="Password"
+                            label="Hasło"
                             type="password"
                             id="password1"
                             autoComplete="current-password1"
@@ -108,7 +108,7 @@ function Register() {
                             required
                             fullWidth
                             name="password2"
-                            label="Password (confirm)"
+                            label="Potwierdź hasło"
                             type="password"
                             id="password2"
                             autoComplete="current-password2"
@@ -120,7 +120,7 @@ function Register() {
                             margin="normal"
                             fullWidth
                             id="first_name"
-                            label="First name"
+                            label="Imię"
                             name="first_name"
                             value={user.first_name}
                             onChange={handleChange}
@@ -130,7 +130,7 @@ function Register() {
                             margin="normal"
                             fullWidth
                             id="last_name"
-                            label="Last name"
+                            label="Nazwisko"
                             name="last_name"
                             value={user.last_name}
                             onChange={handleChange}
@@ -140,7 +140,7 @@ function Register() {
                             margin="normal"
                             fullWidth
                             id="telephone"
-                            label="Phone number"
+                            label="Numer telefonu"
                             name="telephone"
                             value={user.telephone}
                             onChange={handleChange}
@@ -151,12 +151,12 @@ function Register() {
                             variant="contained"
                             color="primary"
                         >
-                            Sign Up
+                            Zarejestruj się
                         </Button>{registering && <CircularProgress/>}
                         <Grid container>
                             <Grid item>
                                 <Link href={"/login"} variant="body2">
-                                    {"Have an account? Sign In"}
+                                    {"Posiadasz już konto? Zaloguj się"}
                                 </Link>
                             </Grid>
                         </Grid>
