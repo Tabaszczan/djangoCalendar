@@ -76,80 +76,31 @@ function Register() {
                         Zarejestruj się
                     </Typography>
                     <form onSubmit={handleSubmit}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            value={user.email}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email"
+                                   name="email" autoComplete="email" autoFocus value={user.email} onChange={handleChange}
                         />
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password1"
-                            label="Hasło"
-                            type="password"
-                            id="password1"
-                            autoComplete="current-password1"
-                            value={user.password1}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" required fullWidth name="password1" label="Hasło"
+                            type="password" id="password1" autoComplete="current-password1" value={user.password1} onChange={handleChange}
                         />
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password2"
-                            label="Potwierdź hasło"
-                            type="password"
-                            id="password2"
-                            autoComplete="current-password2"
-                            value={user.password2}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" required fullWidth name="password2" label="Potwierdź hasło" type="password"
+                            id="password2" autoComplete="current-password2" value={user.password2} onChange={handleChange}
                         />
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            fullWidth
-                            id="first_name"
-                            label="Imię"
-                            name="first_name"
-                            value={user.first_name}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" fullWidth id="first_name" label="Imię" name="first_name"
+                            value={user.first_name} onChange={handleChange}
                         />
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            fullWidth
-                            id="last_name"
-                            label="Nazwisko"
-                            name="last_name"
-                            value={user.last_name}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" fullWidth id="last_name" label="Nazwisko"
+                            name="last_name" value={user.last_name} onChange={handleChange}
                         />
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            fullWidth
-                            id="telephone"
-                            label="Numer telefonu"
-                            name="telephone"
-                            value={user.telephone}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" fullWidth id="telephone" label="Numer telefonu"
+                            name="telephone" value={user.telephone} onChange={handleChange}
                         />
                         <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
+                            type="submit" fullWidth variant="contained" color="primary"
                         >
                             Zarejestruj się
                         </Button>{registering && <CircularProgress/>}
