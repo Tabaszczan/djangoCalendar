@@ -1,5 +1,6 @@
+# Django
 from django.apps import AppConfig
 
 
-class CalendarApiConfig(AppConfig):
+class CalendarConfig(AppConfig):
     name = 'calendar_api'
