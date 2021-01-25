@@ -60,18 +60,10 @@ function EventsList() {
     return (
         <Container maxWidth={false}>
             <h2>Wydarzenia:</h2>
-            <Grid container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="baseline"
-                  spacing={2}>
-                {events.items &&
-                events.items.map((item: any, k: any) =>
+            <Grid container direction="row" justify="flex-start" alignItems="baseline" spacing={2}>
+                {events.items && events.items.map((item: any, k: any) =>
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={item.id}>
-                        <Paper elevation={3}
-                               variant="outlined"
-                               square
-                               className={classes.paper}>
+                        <Paper elevation={3} variant="outlined" square className={classes.paper}>
                             <Grid container spacing={2} justify="space-between">
                                 <Grid item zeroMinWidth xs={10}>
                                     <Typography variant="subtitle1">
