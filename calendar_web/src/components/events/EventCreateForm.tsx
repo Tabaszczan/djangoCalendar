@@ -55,65 +55,29 @@ function EventCreateForm() {
                     <h2 className={classes.marginAutoItem}>Utwórz wydarzenie</h2>
                     <Grid item>
                         <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="event_name"
-                            label="Nazwa Wydarzenia"
-                            name="event_name"
-                            autoFocus
-                            value={event.event_name}
-                            onChange={handleChange}
+                            variant="outlined" margin="normal" required fullWidth
+                            id="event_name" label="Nazwa Wydarzenia" name="event_name"
+                            autoFocus value={event.event_name} onChange={handleChange}
                         />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="start_date"
-                            label="Data rozpoczęcia"
-                            name="start_date"
-                            type="datetime-local"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={event.start_date}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required
+                            fullWidth id="start_date" label="Data rozpoczęcia" name="start_date"
+                            type="datetime-local" InputLabelProps={{ shrink: true}}
+                            value={event.start_date} onChange={handleChange}
                         />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="end_date"
-                            label="Data zakończenia"
-                            name="end_date"
-                            type="datetime-local"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={event.end_date}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required fullWidth
+                            id="end_date" label="Data zakończenia" name="end_date"
+                            type="datetime-local" InputLabelProps={{shrink: true}}
+                            value={event.end_date} onChange={handleChange}
                         />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="description"
-                            label="Opis"
-                            name="description"
-                            multiline
-                            rows={5}
-                            value={event.description}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required fullWidth
+                            id="description" label="Opis" name="description" multiline
+                            rows={5} value={event.description} onChange={handleChange}
                         />
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary">Wyślij</Button>
