@@ -77,17 +77,9 @@ function GroupCreateForm() {
             <Grid item xs={12} sm={6} className={classes.padding}>
                 <h2 className={classes.marginAutoItem}>Utwórz grupę</h2>
                 <Grid item>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="group_name"
-                        label="Group name"
-                        name="group_name"
-                        autoFocus
-                        value={group.group_name}
-                        onChange={handleChange}
+                    <TextField variant="outlined" margin="normal" required fullWidth
+                        id="group_name" label="Group name" name="group_name"
+                        autoFocus value={group.group_name} onChange={handleChange}
                     />
                 </Grid>
                 <Grid item className={classes.padding}>
@@ -105,21 +97,11 @@ function GroupCreateForm() {
                             <TableBody>
                                 {users.users && users.users.map((row: any, index: any) => {
                                     return (row.email != user.user.email &&
-                                        <TableRow
-                                            hover
-                                            role="checkbox"
-                                        >
+                                        <TableRow hover role="checkbox">
                                             <TableCell>
-                                                <Checkbox
-                                                    name="members"
-                                                    value={row.id}
-                                                    onChange={handleCheckboxChange}
-                                                />
+                                                <Checkbox name="members" value={row.id} onChange={handleCheckboxChange}/>
                                             </TableCell>
-                                            <TableCell
-                                                component="th"
-                                                scope="row"
-                                                padding="none">{row.first_name}</TableCell>
+                                            <TableCell component="th" scope="row" padding="none">{row.first_name}</TableCell>
                                             <TableCell>{row.last_name}</TableCell>
                                             <TableCell>{row.email}</TableCell>
                                             <TableCell>{row.telephone}</TableCell>
