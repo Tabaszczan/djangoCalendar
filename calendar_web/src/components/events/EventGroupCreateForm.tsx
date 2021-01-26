@@ -65,76 +65,36 @@ function EventGroupCreateForm() {
                 <form id="group" className={classes.root} onSubmit={handleEventGroupSubmit}>
                     <h2 className={classes.marginAutoItem}>Utwórz wydarzenie Grupowe</h2>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="event_name"
-                            label="Nazwa wydarzenia"
-                            name="event_name"
-                            autoFocus
-                            value={event.event_name}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required fullWidth
+                            id="event_name" label="Nazwa wydarzenia" name="event_name"
+                            autoFocus value={event.event_name} onChange={handleChange}
                         />
                     </Grid>
                     <Grid item>
-                        <Autocomplete
-                            options={groups_list}
-                            getOptionLabel={(option) => option.group_name}
+                        <Autocomplete options={groups_list} getOptionLabel={(option) => option.group_name}
                             renderInput={(params) =>
                                 <TextField {...params} variant="outlined" label="Grupy" name="group"/>}
                             onInputChange={handleInputChange}
-
                         />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="start_date"
-                            label="Data rozpoczęcia"
-                            name="start_date"
-                            type="datetime-local"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={event.start_date}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required fullWidth
+                            id="start_date" label="Data rozpoczęcia" name="start_date"
+                            type="datetime-local" InputLabelProps={{shrink: true}}
+                            value={event.start_date} onChange={handleChange}
                         />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="end_date"
-                            label="Data zakończenia"
-                            name="end_date"
-                            type="datetime-local"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={event.end_date}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required
+                            fullWidth id="end_date" label="Data zakończenia" name="end_date"
+                            type="datetime-local" InputLabelProps={{shrink: true}}
+                            value={event.end_date} onChange={handleChange}
                         />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="description"
-                            label="Opis"
-                            name="description"
-                            multiline
-                            rows={5}
-                            value={event.description}
-                            onChange={handleChange}
+                        <TextField variant="outlined" margin="normal" required fullWidth
+                            id="description" label="Opis" name="description" multiline
+                            rows={5} value={event.description} onChange={handleChange}
                         />
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary">Wyślij</Button>
