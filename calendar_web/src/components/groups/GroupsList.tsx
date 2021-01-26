@@ -72,10 +72,7 @@ function GroupsList() {
                     {groups.items &&
                     groups.items.map((item: any, key: any) =>
                         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={key}>
-                            <Paper elevation={3}
-                                   variant="outlined"
-                                   square
-                                   className={classes.paper}>
+                            <Paper elevation={3} variant="outlined" square className={classes.paper}>
                                 <Grid container spacing={2} justify="space-between">
                                     <Grid item zeroMinWidth xs={10}>
                                         <Typography variant="subtitle1">
@@ -88,42 +85,26 @@ function GroupsList() {
                                             Członkowie:
                                         </Typography>
                                         <ul>
-                                            <Typography variant="body1">
-                                                {item.members.map((member: any, key: any) =>
-                                                    <li key={key}>
-                                                        {member.first_name} {member.last_name}, {member.email}
-                                                    </li>
-                                                )}
+                                            <Typography variant="body1">{item.members.map((member: any, key: any) =>
+                                                <li key={key}>
+                                                    {member.first_name} {member.last_name}, {member.email}
+                                                </li>
+                                            )}
                                             </Typography>
                                         </ul>
-
                                     </Grid>
                                     <Grid item xs={2}>
-                                        {item.owner.email === user.user.email && <IconButton edge="end"
-                                                                                            color="inherit"
-                                                                                            aria-label="edit"
-                                                                                            size="small"
-                                                                                            onClick={() => handleEditGroup(item.id)}>
+                                        {item.owner.email === user.user.email &&
+                                        <IconButton edge="end" color="inherit" aria-label="edit" size="small"
+                                                    onClick={() => handleEditGroup(item.id)}>
                                             <EditIcon fontSize="small"/>
                                         </IconButton>}
-                                        {
-                                            item.deleting ? <CircularProgress/>
-                                                : item.deleteError ?
-                                                <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                                                          open={open}
-                                                          autoHideDuration={6000}
-                                                          onClose={handleClose}>
-                                                    <Alert severity="error"
-                                                           action={<CloseIcon onClick={handleClose}/>}>Wystąpił
-                                                        błąd</Alert>
-                                                </Snackbar>
-                                                : <span>{item.owner.email === user.user.email &&
-                                                <IconButton edge="end" color="inherit" aria-label="remove"
-                                                            size="small"
-                                                            onClick={() => handleDeleteGroupEvent(item.id)}>
-                                                    <DeleteIcon fontSize="small"/>
-                                                </IconButton>}</span>
-                                        }
+                                        <span>{item.owner.email === user.user.email &&
+                                        <IconButton edge="end" color="inherit" aria-label="remove"
+                                                    size="small"
+                                                    onClick={() => handleDeleteGroupEvent(item.id)}>
+                                            <DeleteIcon fontSize="small"/>
+                                        </IconButton>}</span>
                                     </Grid>
                                 </Grid>
                             </Paper>
