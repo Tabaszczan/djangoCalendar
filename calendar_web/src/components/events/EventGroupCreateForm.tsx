@@ -71,7 +71,7 @@ function EventGroupCreateForm() {
                             required
                             fullWidth
                             id="event_name"
-                            label="Event Name"
+                            label="Nazwa wydarzenia"
                             name="event_name"
                             autoFocus
                             value={event.event_name}
@@ -95,7 +95,7 @@ function EventGroupCreateForm() {
                             required
                             fullWidth
                             id="start_date"
-                            label="Start Date"
+                            label="Data rozpoczęcia"
                             name="start_date"
                             type="datetime-local"
                             InputLabelProps={{
@@ -112,7 +112,7 @@ function EventGroupCreateForm() {
                             required
                             fullWidth
                             id="end_date"
-                            label="End Date"
+                            label="Data zakończenia"
                             name="end_date"
                             type="datetime-local"
                             InputLabelProps={{
@@ -129,7 +129,7 @@ function EventGroupCreateForm() {
                             required
                             fullWidth
                             id="description"
-                            label="Description"
+                            label="Opis"
                             name="description"
                             multiline
                             rows={5}

@@ -71,7 +71,7 @@ function EventGroupUpdateForm() {
                 <h2 className={classes.marginAutoItem}>Zaktualizuj wydarzenie</h2>
                 <Grid item>
                     <TextField variant="outlined" margin="normal" required
-                        fullWidth id="event_name" label="Event Name"
+                        fullWidth id="event_name" label="Nazwa wydarzenia"
                         name="event_name" autoFocus value={event.event_name}
                         onChange={handleChange}
                     />
@@ -92,7 +92,7 @@ function EventGroupUpdateForm() {
                         required
                         fullWidth
                         id="start_date"
-                        label="Start Date"
+                        label="Data rozpoczęcia"
                         name="start_date"
                         type="datetime-local"
                         InputLabelProps={{
@@ -109,7 +109,7 @@ function EventGroupUpdateForm() {
                         required
                         fullWidth
                         id="end_date"
-                        label="End Date"
+                        label="Data zakończenia"
                         name="end_date"
                         type="datetime-local"
                         InputLabelProps={{
@@ -126,7 +126,7 @@ function EventGroupUpdateForm() {
                         required
                         fullWidth
                         id="description"
-                        label="Description"
+                        label="Opis"
                         name="description"
                         multiline
                         rows={5}
