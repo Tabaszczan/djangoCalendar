@@ -77,61 +77,33 @@ function EventGroupUpdateForm() {
                     />
                 </Grid>
                 <Grid item>
-                    <Autocomplete
-                        options={groups_list}
-                        getOptionLabel={(option) => option.group_name}
+                    <Autocomplete options={groups_list} getOptionLabel={(option) => option.group_name}
                         renderInput={(params) =>
                             <TextField {...params} variant="outlined" label="Grupy" name="group"/>}
                         onInputChange={handleInputChange}
                     />
                 </Grid>
                 <Grid item>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="start_date"
-                        label="Data rozpoczęcia"
-                        name="start_date"
-                        type="datetime-local"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
+                    <TextField variant="outlined" margin="normal" required fullWidth id="start_date"
+                        label="Data rozpoczęcia" name="start_date" type="datetime-local"
+                        InputLabelProps={{shrink: true}}
                         value={moment(event.start_date).format('YYYY-MM-DDTHH:MM')}
                         onChange={handleChange}
                     />
                 </Grid>
                 <Grid item>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="end_date"
-                        label="Data zakończenia"
-                        name="end_date"
-                        type="datetime-local"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
+                    <TextField variant="outlined" margin="normal" required
+                        fullWidth id="end_date" label="Data zakończenia"
+                        name="end_date" type="datetime-local"
+                        InputLabelProps={{shrink: true}}
                         value={moment(event.end_date).format('YYYY-MM-DDTHH:MM')}
                         onChange={handleChange}
                     />
                 </Grid>
                 <Grid item>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="description"
-                        label="Opis"
-                        name="description"
-                        multiline
-                        rows={5}
-                        value={event.description}
-                        onChange={handleChange}
+                    <TextField variant="outlined" margin="normal" required fullWidth
+                        id="description" label="Opis" name="description" multiline
+                        rows={5} value={event.description} onChange={handleChange}
                     />
                 </Grid>
                 <Button type="submit" fullWidth variant="contained" color="primary">Wyślij</Button>
