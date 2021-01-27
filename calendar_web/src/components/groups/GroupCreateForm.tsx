@@ -78,7 +78,7 @@ function GroupCreateForm() {
                 <h2 className={classes.marginAutoItem}>Utwórz grupę</h2>
                 <Grid item>
                     <TextField variant="outlined" margin="normal" required fullWidth
-                        id="group_name" label="Group name" name="group_name"
+                        id="group_name" label="Nazwa grupy" name="group_name"
                         autoFocus value={group.group_name} onChange={handleChange}
                     />
                 </Grid>
